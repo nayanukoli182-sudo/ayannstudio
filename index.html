@@ -353,8 +353,8 @@ ci.addEventListener('mouseout',()=>{if(!isDragging)ci.style.animationPlayState='
 const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible');});},{threshold:0.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
-  <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+ <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap');
 .svc-sec{background:#060e18;padding:60px 16px;text-align:center;font-family:'Poppins',sans-serif;overflow:hidden;}
 .svc-title{font-size:clamp(26px,4vw,48px);font-weight:800;color:#fff;margin-bottom:56px;}
 .svc-track{overflow:hidden;position:relative;}
@@ -371,20 +371,20 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 .svc-card:nth-child(4){animation-delay:1.2s;}
 .svc-card:nth-child(5){animation-delay:1.6s;}
 @keyframes svcFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
-.svc-card:hover{transform:translateY(-14px) scale(1.03);}
+.svc-card:hover{transform:translateY(-14px) scale(1.04);}
 .svc-1{background:linear-gradient(155deg,#0c1f2e,#0a3550,#061520);}
 .svc-2{background:linear-gradient(155deg,#0a0e2e,#131a5a,#060830);}
 .svc-3{background:linear-gradient(155deg,#0a1e10,#0d3d1e,#061208);}
 .svc-4{background:linear-gradient(155deg,#1a0a2e,#38105a,#100618);}
 .svc-5{background:linear-gradient(155deg,#2a1206,#5a2a0a,#1a0a04);}
-.svc-glow{position:absolute;width:90px;height:90px;border-radius:50%;top:80px;left:50%;transform:translateX(-50%);filter:blur(30px);opacity:0.55;animation:svcGlow 3s ease-in-out infinite;}
+.svc-glow{position:absolute;width:90px;height:90px;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);filter:blur(30px);opacity:0.55;animation:svcGlow 3s ease-in-out infinite;}
 @keyframes svcGlow{0%,100%{opacity:0.4;}50%{opacity:0.75;}}
 .svc-1 .svc-glow{background:#1e96ff;}
 .svc-2 .svc-glow{background:#5064ff;}
 .svc-3 .svc-glow{background:#1edc64;}
 .svc-4 .svc-glow{background:#b43cff;}
 .svc-5 .svc-glow{background:#ff8c28;}
-.svc-icon{position:absolute;top:50px;left:50%;transform:translateX(-50%);font-size:46px;z-index:2;}
+.svc-obj{position:absolute;top:28px;left:50%;transform:translateX(-50%);width:110px;height:110px;}
 .svc-label{position:absolute;bottom:0;left:0;right:0;padding:16px 16px 20px;background:linear-gradient(0deg,rgba(0,0,0,0.75),transparent);text-align:left;}
 .svc-name{font-weight:700;font-size:14px;color:#fff;}
 .svc-desc{font-weight:300;font-size:11px;color:rgba(255,255,255,0.5);margin-top:4px;}
@@ -396,18 +396,30 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 <section class="svc-sec">
   <h2 class="svc-title">We offer various services</h2>
   <div class="svc-track">
-    <div class="svc-cards">
-      <div class="svc-card svc-1"><div class="svc-glow"></div><div class="svc-icon">🎬</div><div class="svc-label"><div class="svc-name">Video Shooting</div><div class="svc-desc">Cinematic iPhone production</div></div></div>
-      <div class="svc-card svc-2"><div class="svc-glow"></div><div class="svc-icon">📦</div><div class="svc-label"><div class="svc-name">Motion Graphics</div><div class="svc-desc">Animated brand visuals</div></div></div>
-      <div class="svc-card svc-3"><div class="svc-glow"></div><div class="svc-icon">🌀</div><div class="svc-label"><div class="svc-name">2D & 3D Animation</div><div class="svc-desc">Story-driven animations</div></div></div>
-      <div class="svc-card svc-4"><div class="svc-glow"></div><div class="svc-icon">📱</div><div class="svc-label"><div class="svc-name">Social Media Content</div><div class="svc-desc">Reels, Shorts & Posts</div></div></div>
-      <div class="svc-card svc-5"><div class="svc-glow"></div><div class="svc-icon">✂️</div><div class="svc-label"><div class="svc-name">Video Editing</div><div class="svc-desc">Premiere Pro & CapCut</div></div></div>
+    <div class="svc-cards" id="svcCards">
+      <div class="svc-card svc-1"><div class="svc-glow"></div><canvas class="svc-obj" id="svc1" width="110" height="110"></canvas><div class="svc-label"><div class="svc-name">Video Shooting</div><div class="svc-desc">Cinematic iPhone production</div></div></div>
+      <div class="svc-card svc-2"><div class="svc-glow"></div><canvas class="svc-obj" id="svc2" width="110" height="110"></canvas><div class="svc-label"><div class="svc-name">Motion Graphics</div><div class="svc-desc">Animated brand visuals</div></div></div>
+      <div class="svc-card svc-3"><div class="svc-glow"></div><canvas class="svc-obj" id="svc3" width="110" height="110"></canvas><div class="svc-label"><div class="svc-name">2D & 3D Animation</div><div class="svc-desc">Story-driven animations</div></div></div>
+      <div class="svc-card svc-4"><div class="svc-glow"></div><canvas class="svc-obj" id="svc4" width="110" height="110"></canvas><div class="svc-label"><div class="svc-name">Social Media Content</div><div class="svc-desc">Reels, Shorts & Posts</div></div></div>
+      <div class="svc-card svc-5"><div class="svc-glow"></div><canvas class="svc-obj" id="svc5" width="110" height="110"></canvas><div class="svc-label"><div class="svc-name">Video Editing</div><div class="svc-desc">Premiere Pro & CapCut</div></div></div>
     </div>
   </div>
   <div class="svc-cta">
     <button class="svc-btn-p">Get Free Sample 🚀</button>
     <button class="svc-btn-g">View My Work →</button>
   </div>
+</section>
+
+<script>
+const TAU=Math.PI*2;
+function svcSetup(id,fn){const c=document.getElementById(id),ctx=c.getContext('2d');let t=0;(function loop(){ctx.clearRect(0,0,110,110);fn(ctx,t);t+=0.018;requestAnimationFrame(loop);})();}
+svcSetup('svc1',(ctx,t)=>{const cx=55,cy=55;for(let i=3;i>0;i--){const r=28+i*6,a=t+i*0.5;ctx.save();ctx.translate(cx,cy);ctx.rotate(a);ctx.beginPath();ctx.ellipse(0,0,r,r*0.3,0,0,TAU);ctx.strokeStyle=`rgba(30,150,255,${0.15+i*0.1})`;ctx.lineWidth=1.5;ctx.stroke();ctx.restore();}const gr=ctx.createRadialGradient(cx-8,cy-8,2,cx,cy,22);gr.addColorStop(0,'#6dd5ff');gr.addColorStop(0.5,'#1e96ff');gr.addColorStop(1,'#0a3a6a');ctx.beginPath();ctx.arc(cx,cy,22,0,TAU);ctx.fillStyle=gr;ctx.fill();ctx.beginPath();ctx.arc(cx-6,cy-7,6,0,TAU);ctx.fillStyle='rgba(255,255,255,0.25)';ctx.fill();});
+svcSetup('svc2',(ctx,t)=>{const cx=55,cy=55;function cube(x,y,s,a,op){ctx.save();ctx.translate(x,y);ctx.rotate(a);ctx.globalAlpha=op;ctx.beginPath();ctx.moveTo(0,-s);ctx.lineTo(s*0.7,-s*0.4);ctx.lineTo(s*0.7,s*0.4-s);ctx.lineTo(0,-s*0.4);ctx.closePath();ctx.fillStyle='#7090ff';ctx.fill();ctx.beginPath();ctx.moveTo(s*0.7,-s*0.4);ctx.lineTo(s*0.7,s*0.6);ctx.lineTo(0,s);ctx.lineTo(0,s*0.4-s*0.9);ctx.closePath();ctx.fillStyle='#3050cc';ctx.fill();ctx.beginPath();ctx.moveTo(0,-s);ctx.lineTo(0,s*0.4-s*0.9+s*0.5);ctx.lineTo(-s*0.35,s*0.3);ctx.lineTo(-s*0.35,-s*0.7);ctx.closePath();ctx.fillStyle='#5070ee';ctx.fill();ctx.restore();}cube(cx,cy,24,t,1);cube(cx+22,cy-18,13,t*1.3+1,0.6);cube(cx-18,cy+16,10,t*0.8+2,0.45);});
+svcSetup('svc3',(ctx,t)=>{const cx=55,cy=58;ctx.save();ctx.beginPath();ctx.arc(cx,cy+5,34,Math.PI,0);ctx.lineTo(cx+34,cy+25);ctx.lineTo(cx-34,cy+25);ctx.closePath();const gr2=ctx.createLinearGradient(cx,cy-30,cx,cy+25);gr2.addColorStop(0,'#b8fff0');gr2.addColorStop(1,'#40c896');ctx.fillStyle=gr2;ctx.fill();ctx.restore();ctx.save();ctx.beginPath();ctx.moveTo(cx-40,cy+24);ctx.lineTo(cx+40,cy+24);ctx.lineTo(cx+40,cy+40);ctx.lineTo(cx-40,cy+40);ctx.closePath();const grf=ctx.createLinearGradient(cx,cy+24,cx,cy+40);grf.addColorStop(0,'#f5d060');grf.addColorStop(1,'#c8a020');ctx.fillStyle=grf;ctx.fill();ctx.restore();const bx=cx+Math.sin(t)*26,by=cy+18;const grb=ctx.createRadialGradient(bx-3,by-4,1,bx,by,11);grb.addColorStop(0,'#ffe080');grb.addColorStop(1,'#a06000');ctx.beginPath();ctx.arc(bx,by,11,0,TAU);ctx.fillStyle=grb;ctx.fill();ctx.beginPath();ctx.ellipse(bx,cy+28,9,3,0,0,TAU);ctx.fillStyle='rgba(0,0,0,0.2)';ctx.fill();});
+svcSetup('svc4',(ctx,t)=>{const cx=55,cy=55;const colors=['#e060ff','#ff60c8','#c060ff','#8040ff'];const radii=[30,22,38,18];const speeds=[1,1.4,0.7,1.8];const sizes=[10,8,7,6];colors.forEach((c,i)=>{const a=t*speeds[i]+i*(TAU/colors.length);const x=cx+Math.cos(a)*radii[i],y=cy+Math.sin(a)*radii[i]*0.45;const gr=ctx.createRadialGradient(x-2,y-2,1,x,y,sizes[i]);gr.addColorStop(0,'#fff');gr.addColorStop(0.3,c);gr.addColorStop(1,'rgba(0,0,0,0)');ctx.beginPath();ctx.arc(x,y,sizes[i],0,TAU);ctx.fillStyle=gr;ctx.fill();});const gc=ctx.createRadialGradient(cx-4,cy-4,2,cx,cy,18);gc.addColorStop(0,'#f0c0ff');gc.addColorStop(1,'#6010a0');ctx.beginPath();ctx.arc(cx,cy,18,0,TAU);ctx.fillStyle=gc;ctx.fill();ctx.beginPath();ctx.arc(cx-5,cy-5,5,0,TAU);ctx.fillStyle='rgba(255,255,255,0.3)';ctx.fill();});
+svcSetup('svc5',(ctx,t)=>{const cx=55,cy=55;ctx.save();ctx.translate(cx,cy);ctx.rotate(t*0.6);const go=ctx.createLinearGradient(-30,-30,30,30);go.addColorStop(0,'#ff9a40');go.addColorStop(1,'#c05010');ctx.beginPath();ctx.arc(0,0,30,0,TAU);ctx.strokeStyle=go;ctx.lineWidth=5;ctx.stroke();for(let i=0;i<8;i++){const a=i*(TAU/8),sx=Math.cos(a)*23,sy=Math.sin(a)*23;ctx.beginPath();ctx.arc(sx,sy,4,0,TAU);ctx.fillStyle='rgba(255,150,50,0.7)';ctx.fill();}ctx.restore();const gp=ctx.createRadialGradient(cx-4,cy-4,2,cx,cy,18);gp.addColorStop(0,'#ffcc80');gp.addColorStop(1,'#c05010');ctx.beginPath();ctx.arc(cx,cy,18,0,TAU);ctx.fillStyle=gp;ctx.fill();ctx.save();ctx.translate(cx+2,cy);ctx.beginPath();ctx.moveTo(-6,-9);ctx.lineTo(10,0);ctx.lineTo(-6,9);ctx.closePath();ctx.fillStyle='rgba(255,255,255,0.9)';ctx.fill();ctx.restore();});
+document.querySelectorAll('.svc-card').forEach(card=>{card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-0.5,y=(e.clientY-r.top)/r.height-0.5;card.style.transform=`translateY(-14px) rotateX(${-y*14}deg) rotateY(${x*14}deg) scale(1.04)`;});card.addEventListener('mouseleave',()=>{card.style.transform='';});});
+</script>
 </section>
 </body>
 </html>

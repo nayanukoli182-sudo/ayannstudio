@@ -353,5 +353,61 @@ ci.addEventListener('mouseout',()=>{if(!isDragging)ci.style.animationPlayState='
 const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible');});},{threshold:0.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+.svc-sec{background:#060e18;padding:60px 16px;text-align:center;font-family:'Poppins',sans-serif;overflow:hidden;}
+.svc-title{font-size:clamp(26px,4vw,48px);font-weight:800;color:#fff;margin-bottom:56px;}
+.svc-track{overflow:hidden;position:relative;}
+.svc-track::before,.svc-track::after{content:'';position:absolute;top:0;bottom:0;width:120px;z-index:10;pointer-events:none;}
+.svc-track::before{left:0;background:linear-gradient(90deg,#060e18 0%,#060e18 30%,transparent 100%);}
+.svc-track::after{right:0;background:linear-gradient(-90deg,#060e18 0%,#060e18 30%,transparent 100%);}
+.svc-cards{display:flex;gap:18px;padding:24px 12px 32px;animation:svcScroll 18s ease-in-out infinite alternate;}
+@keyframes svcScroll{0%{transform:translateX(40px);}100%{transform:translateX(-160px);}}
+.svc-track:hover .svc-cards{animation-play-state:paused;}
+.svc-card{flex:0 0 190px;height:340px;border-radius:22px;position:relative;overflow:hidden;cursor:pointer;border:1px solid rgba(255,255,255,0.07);animation:svcFloat 4s ease-in-out infinite;transition:transform .4s ease;}
+.svc-card:nth-child(1){animation-delay:0s;}
+.svc-card:nth-child(2){animation-delay:0.4s;}
+.svc-card:nth-child(3){animation-delay:0.8s;}
+.svc-card:nth-child(4){animation-delay:1.2s;}
+.svc-card:nth-child(5){animation-delay:1.6s;}
+@keyframes svcFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.svc-card:hover{transform:translateY(-14px) scale(1.03);}
+.svc-1{background:linear-gradient(155deg,#0c1f2e,#0a3550,#061520);}
+.svc-2{background:linear-gradient(155deg,#0a0e2e,#131a5a,#060830);}
+.svc-3{background:linear-gradient(155deg,#0a1e10,#0d3d1e,#061208);}
+.svc-4{background:linear-gradient(155deg,#1a0a2e,#38105a,#100618);}
+.svc-5{background:linear-gradient(155deg,#2a1206,#5a2a0a,#1a0a04);}
+.svc-glow{position:absolute;width:90px;height:90px;border-radius:50%;top:80px;left:50%;transform:translateX(-50%);filter:blur(30px);opacity:0.55;animation:svcGlow 3s ease-in-out infinite;}
+@keyframes svcGlow{0%,100%{opacity:0.4;}50%{opacity:0.75;}}
+.svc-1 .svc-glow{background:#1e96ff;}
+.svc-2 .svc-glow{background:#5064ff;}
+.svc-3 .svc-glow{background:#1edc64;}
+.svc-4 .svc-glow{background:#b43cff;}
+.svc-5 .svc-glow{background:#ff8c28;}
+.svc-icon{position:absolute;top:50px;left:50%;transform:translateX(-50%);font-size:46px;z-index:2;}
+.svc-label{position:absolute;bottom:0;left:0;right:0;padding:16px 16px 20px;background:linear-gradient(0deg,rgba(0,0,0,0.75),transparent);text-align:left;}
+.svc-name{font-weight:700;font-size:14px;color:#fff;}
+.svc-desc{font-weight:300;font-size:11px;color:rgba(255,255,255,0.5);margin-top:4px;}
+.svc-cta{margin-top:48px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.svc-btn-p{background:linear-gradient(90deg,#1e96ff,#a060ff);color:#fff;font-family:'Poppins',sans-serif;font-weight:700;font-size:13px;padding:14px 32px;border-radius:100px;border:none;cursor:pointer;}
+.svc-btn-g{background:transparent;color:rgba(255,255,255,0.55);font-family:'Poppins',sans-serif;font-size:13px;padding:14px 28px;border-radius:100px;border:1px solid rgba(255,255,255,0.1);cursor:pointer;}
+</style>
+
+<section class="svc-sec">
+  <h2 class="svc-title">We offer various services</h2>
+  <div class="svc-track">
+    <div class="svc-cards">
+      <div class="svc-card svc-1"><div class="svc-glow"></div><div class="svc-icon">🎬</div><div class="svc-label"><div class="svc-name">Video Shooting</div><div class="svc-desc">Cinematic iPhone production</div></div></div>
+      <div class="svc-card svc-2"><div class="svc-glow"></div><div class="svc-icon">📦</div><div class="svc-label"><div class="svc-name">Motion Graphics</div><div class="svc-desc">Animated brand visuals</div></div></div>
+      <div class="svc-card svc-3"><div class="svc-glow"></div><div class="svc-icon">🌀</div><div class="svc-label"><div class="svc-name">2D & 3D Animation</div><div class="svc-desc">Story-driven animations</div></div></div>
+      <div class="svc-card svc-4"><div class="svc-glow"></div><div class="svc-icon">📱</div><div class="svc-label"><div class="svc-name">Social Media Content</div><div class="svc-desc">Reels, Shorts & Posts</div></div></div>
+      <div class="svc-card svc-5"><div class="svc-glow"></div><div class="svc-icon">✂️</div><div class="svc-label"><div class="svc-name">Video Editing</div><div class="svc-desc">Premiere Pro & CapCut</div></div></div>
+    </div>
+  </div>
+  <div class="svc-cta">
+    <button class="svc-btn-p">Get Free Sample 🚀</button>
+    <button class="svc-btn-g">View My Work →</button>
+  </div>
+</section>
 </body>
 </html>

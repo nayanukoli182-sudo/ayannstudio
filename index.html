@@ -421,5 +421,89 @@ svcSetup('svc5',(ctx,t)=>{const cx=55,cy=55;ctx.save();ctx.translate(cx,cy);ctx.
 document.querySelectorAll('.svc-card').forEach(card=>{card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-0.5,y=(e.clientY-r.top)/r.height-0.5;card.style.transform=`translateY(-14px) rotateX(${-y*14}deg) rotateY(${x*14}deg) scale(1.04)`;});card.addEventListener('mouseleave',()=>{card.style.transform='';});});
 </script>
 </section>
+  <!-- SKILLS SECTION -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,600;1,700&family=Inter:wght@300;400;500&display=swap');
+.sk-scene{background:#080808;font-family:'Inter',sans-serif;color:#f0ede8;padding:80px 24px 60px;display:flex;flex-direction:column;align-items:center;text-align:center;perspective:1600px;overflow:hidden;position:relative;}
+.sk-eye{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:rgba(240,237,232,0.35);margin-bottom:18px;}
+.sk-title{font-family:'Playfair Display',serif;font-size:clamp(44px,7vw,82px);line-height:1.0;letter-spacing:-1px;margin-bottom:50px;}
+.sk-title b{font-weight:800;color:#f0ede8;display:block;}
+.sk-title em{font-weight:600;font-style:italic;color:rgba(240,237,232,0.4);display:block;}
+.sk-wrap{position:relative;width:100%;max-width:1100px;}
+.sk-wrap::before,.sk-wrap::after{content:'';position:absolute;top:0;bottom:0;width:120px;z-index:10;pointer-events:none;}
+.sk-wrap::before{left:0;background:linear-gradient(90deg,#080808,transparent);}
+.sk-wrap::after{right:0;background:linear-gradient(-90deg,#080808,transparent);}
+.sk-stage{height:400px;display:flex;align-items:center;justify-content:center;position:relative;perspective:1600px;}
+.sk-card{position:absolute;width:300px;height:360px;border-radius:3px;background:#0c0c0c;border:1px solid rgba(240,237,232,0.07);padding:32px 28px 26px;display:flex;flex-direction:column;transition:all 0.7s cubic-bezier(0.4,0,0.2,1);transform-style:preserve-3d;cursor:pointer;}
+.sk-card[data-pos="0"]{transform:translateX(0) translateZ(80px) rotateY(0deg) scale(1);opacity:1;z-index:5;border-color:rgba(240,237,232,0.18);box-shadow:0 40px 100px rgba(0,0,0,0.8);}
+.sk-card[data-pos="1"]{transform:translateX(260px) translateZ(-50px) rotateY(-20deg) scale(0.86);opacity:0.5;z-index:4;}
+.sk-card[data-pos="-1"]{transform:translateX(-260px) translateZ(-50px) rotateY(20deg) scale(0.86);opacity:0.5;z-index:4;}
+.sk-card[data-pos="2"]{transform:translateX(460px) translateZ(-140px) rotateY(-32deg) scale(0.7);opacity:0.2;z-index:3;}
+.sk-card[data-pos="-2"]{transform:translateX(-460px) translateZ(-140px) rotateY(32deg) scale(0.7);opacity:0.2;z-index:3;}
+.sk-card[data-pos="3"],.sk-card[data-pos="-3"]{opacity:0;z-index:1;pointer-events:none;}
+.sk-num{font-size:11px;letter-spacing:3px;color:rgba(240,237,232,0.2);margin-bottom:26px;}
+.sk-ct{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#f0ede8;margin-bottom:6px;line-height:1.2;}
+.sk-cs{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(240,237,232,0.28);margin-bottom:16px;}
+.sk-div{width:28px;height:1px;background:rgba(240,237,232,0.15);margin-bottom:18px;}
+.sk-ul{list-style:none;flex:1;display:flex;flex-direction:column;gap:9px;}
+.sk-ul li{font-size:12.5px;color:rgba(240,237,232,0.45);padding-left:14px;position:relative;line-height:1.5;}
+.sk-ul li::before{content:'—';position:absolute;left:0;color:rgba(240,237,232,0.2);font-size:10px;}
+.sk-foot{display:flex;justify-content:space-between;padding-top:16px;margin-top:14px;border-top:1px solid rgba(240,237,232,0.06);}
+.sk-exp{font-size:11px;color:rgba(240,237,232,0.2);}
+.sk-tag{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(240,237,232,0.35);}
+.sk-dots{display:flex;gap:8px;margin-top:44px;}
+.sk-dot{width:6px;height:6px;border-radius:50%;background:rgba(240,237,232,0.15);cursor:pointer;transition:all .35s;}
+.sk-dot.on{width:26px;border-radius:3px;background:#f0ede8;}
+.sk-arrs{display:flex;gap:10px;margin-top:18px;}
+.sk-arr{width:42px;height:42px;border-radius:50%;border:1px solid rgba(240,237,232,0.1);background:transparent;color:rgba(240,237,232,0.5);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.sk-arr:hover{border-color:rgba(240,237,232,0.4);color:#f0ede8;}
+</style>
+
+<section class="sk-scene">
+  <p class="sk-eye">Expertise</p>
+  <h2 class="sk-title"><b>Create,</b><em>Impactful</em></h2>
+  <div class="sk-wrap">
+    <div class="sk-stage" id="skStage">
+      <div class="sk-card" data-idx="0"><div class="sk-num">01 / 05</div><div class="sk-ct">E-Commerce Management</div><div class="sk-cs">Commerce</div><div class="sk-div"></div><ul class="sk-ul"><li>Full store setup &amp; management</li><li>Product listing &amp; optimization</li><li>Order &amp; DM automation</li><li>Website handling &amp; maintenance</li></ul><div class="sk-foot"><span class="sk-exp">4+ Years</span><span class="sk-tag">End-to-End</span></div></div>
+      <div class="sk-card" data-idx="1"><div class="sk-num">02 / 05</div><div class="sk-ct">Video Shoot &amp; Edit</div><div class="sk-cs">Production</div><div class="sk-div"></div><ul class="sk-ul"><li>Product video shooting</li><li>Professional video editing</li><li>Reels &amp; short-form content</li><li>Brand story through video</li></ul><div class="sk-foot"><span class="sk-exp">4+ Years</span><span class="sk-tag">Cinematic</span></div></div>
+      <div class="sk-card" data-idx="2"><div class="sk-num">03 / 05</div><div class="sk-ct">Meta &amp; Instagram Ads</div><div class="sk-cs">Advertising</div><div class="sk-div"></div><ul class="sk-ul"><li>Meta Ads setup &amp; management</li><li>Ad creative &amp; copywriting</li><li>Audience targeting &amp; retargeting</li><li>Performance tracking &amp; scaling</li></ul><div class="sk-foot"><span class="sk-exp">High ROAS</span><span class="sk-tag">Performance</span></div></div>
+      <div class="sk-card" data-idx="3"><div class="sk-num">04 / 05</div><div class="sk-ct">Social Media Management</div><div class="sk-cs">Social</div><div class="sk-div"></div><ul class="sk-ul"><li>Complete social media handling</li><li>Content strategy &amp; planning</li><li>Brand presence &amp; growth</li><li>Instagram &amp; Facebook management</li></ul><div class="sk-foot"><span class="sk-exp">4+ Years</span><span class="sk-tag">Consistent</span></div></div>
+      <div class="sk-card" data-idx="4"><div class="sk-num">05 / 05</div><div class="sk-ct">Post &amp; Product Design</div><div class="sk-cs">Design</div><div class="sk-div"></div><ul class="sk-ul"><li>Post &amp; graphic design</li><li>Product visual design</li><li>Ad creative &amp; thumbnail</li><li>Brand identity &amp; aesthetics</li></ul><div class="sk-foot"><span class="sk-exp">4+ Years</span><span class="sk-tag">Visual</span></div></div>
+    </div>
+  </div>
+  <div class="sk-dots" id="skDots">
+    <div class="sk-dot on" onclick="skTo(0)"></div>
+    <div class="sk-dot" onclick="skTo(1)"></div>
+    <div class="sk-dot" onclick="skTo(2)"></div>
+    <div class="sk-dot" onclick="skTo(3)"></div>
+    <div class="sk-dot" onclick="skTo(4)"></div>
+  </div>
+  <div class="sk-arrs">
+    <button class="sk-arr" onclick="skPrev()">←</button>
+    <button class="sk-arr" onclick="skNext()">→</button>
+  </div>
+</section>
+
+<script>
+(function(){
+const cards=[...document.querySelectorAll('.sk-card')],dots=[...document.querySelectorAll('.sk-dot')],N=cards.length;
+let cur=0,auto;
+function pos(i){let d=i-cur;if(d>Math.floor(N/2))d-=N;if(d<-Math.floor(N/2))d+=N;return Math.max(-3,Math.min(3,d));}
+function render(){cards.forEach((c,i)=>c.setAttribute('data-pos',pos(i)));dots.forEach((d,i)=>d.classList.toggle('on',i===cur));}
+function skTo(i){cur=((i%N)+N)%N;render();}
+function skNext(){skTo(cur+1);}
+function skPrev(){skTo(cur-1);}
+window.skTo=skTo;window.skNext=skNext;window.skPrev=skPrev;
+render();
+auto=setInterval(skNext,3500);
+cards.forEach((c,i)=>c.addEventListener('click',()=>{if(pos(i)!==0){clearInterval(auto);skTo(i);auto=setInterval(skNext,3500);}}));
+let sx=0,drag=false;
+const st=document.getElementById('skStage');
+st.addEventListener('mousedown',e=>{drag=true;sx=e.clientX;clearInterval(auto);});
+document.addEventListener('mouseup',e=>{if(!drag)return;drag=false;const dx=e.clientX-sx;if(dx<-40)skNext();else if(dx>40)skPrev();auto=setInterval(skNext,3500);});
+st.addEventListener('touchstart',e=>{drag=true;sx=e.touches[0].clientX;clearInterval(auto);},{passive:true});
+document.addEventListener('touchend',e=>{if(!drag)return;drag=false;const dx=e.changedTouches[0].clientX-sx;if(dx<-40)skNext();else if(dx>40)skPrev();auto=setInterval(skNext,3500);});
+})();
+</script>
 </body>
 </html>

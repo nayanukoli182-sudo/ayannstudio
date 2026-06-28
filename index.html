@@ -505,5 +505,672 @@ st.addEventListener('touchstart',e=>{drag=true;sx=e.touches[0].clientX;clearInte
 document.addEventListener('touchend',e=>{if(!drag)return;drag=false;const dx=e.changedTouches[0].clientX-sx;if(dx<-40)skNext();else if(dx>40)skPrev();auto=setInterval(skNext,3500);});
 })();
 </script>
+  <!-- HIRE ME SECTION -->
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=Inter:wght@300;400;500;600&display=swap');
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  background:#060606;
+  font-family:'Inter',sans-serif;
+  color:#fff;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ── CANVAS BG ── */
+#bgCanvas{
+  position:fixed;inset:0;
+  z-index:0;pointer-events:none;
+}
+
+/* ── SECTION ── */
+.hire-sec{
+  position:relative;z-index:2;
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr 1.1fr;
+  align-items:center;
+  padding:80px 6% 80px;
+  gap:70px;
+  max-width:1400px;
+  margin:0 auto;
+}
+
+/* ── LEFT ── */
+.left{display:flex;flex-direction:column;}
+
+.pill{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:100px;padding:8px 18px;
+  font-size:12px;color:rgba(255,255,255,0.55);
+  width:fit-content;margin-bottom:36px;
+  animation:fadeUp 0.8s ease both;
+  backdrop-filter:blur(8px);
+  background:rgba(255,255,255,0.03);
+}
+.pill-dot{width:6px;height:6px;border-radius:50%;background:#fff;animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+
+.hire-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(56px,8vw,108px);
+  font-weight:900;
+  line-height:0.95;
+  letter-spacing:-3px;
+  margin-bottom:16px;
+  animation:fadeUp 0.8s 0.1s ease both;
+}
+.hire-title .line1{display:block;color:#fff;}
+.hire-title .line2{
+  display:block;
+  background:linear-gradient(135deg,rgba(255,255,255,0.9),rgba(255,255,255,0.2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  font-style:italic;
+}
+
+.tagline{
+  font-size:14px;color:rgba(255,255,255,0.35);
+  letter-spacing:0.5px;line-height:1.7;
+  max-width:340px;margin-bottom:50px;
+  animation:fadeUp 0.8s 0.2s ease both;
+}
+
+/* 3D Globe */
+.globe-wrap{
+  position:relative;
+  width:220px;height:220px;
+  margin-bottom:42px;
+  animation:fadeUp 0.8s 0.3s ease both;
+}
+#globeCanvas{width:220px;height:220px;}
+
+.phone-row{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:30px;
+  animation:fadeUp 0.8s 0.4s ease both;
+}
+.phone-ico{
+  width:44px;height:44px;border-radius:50%;
+  border:1px solid rgba(255,255,255,0.12);
+  display:flex;align-items:center;justify-content:center;
+  font-size:17px;
+  background:rgba(255,255,255,0.04);
+  animation:pulse3d 3s ease-in-out infinite;
+}
+@keyframes pulse3d{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,0.08);}50%{box-shadow:0 0 0 10px rgba(255,255,255,0);}}
+.phone-label{font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;}
+.phone-num{font-size:16px;font-weight:600;letter-spacing:0.3px;}
+
+.start-btn{
+  display:inline-flex;align-items:center;gap:12px;
+  background:#fff;color:#000;
+  font-size:14px;font-weight:700;
+  padding:15px 26px;border-radius:100px;
+  width:fit-content;cursor:pointer;border:none;
+  font-family:'Inter',sans-serif;
+  transition:all 0.3s;
+  animation:fadeUp 0.8s 0.5s ease both;
+  position:relative;overflow:hidden;
+}
+.start-btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 40%,rgba(0,0,0,0.05));
+  opacity:0;transition:opacity 0.3s;
+}
+.start-btn:hover{transform:translateY(-2px);box-shadow:0 20px 60px rgba(255,255,255,0.15);}
+.start-btn:hover::before{opacity:1;}
+.btn-arr{
+  width:32px;height:32px;border-radius:50%;
+  background:#000;color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;transition:transform 0.3s;
+}
+.start-btn:hover .btn-arr{transform:rotate(45deg);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── RIGHT — 3D FORM ── */
+.right{
+  animation:fadeUp 0.8s 0.3s ease both;
+  perspective:1200px;
+}
+
+.form-card{
+  background:rgba(12,12,12,0.9);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:24px;
+  padding:42px 38px;
+  backdrop-filter:blur(20px);
+  transform:rotateY(-4deg) rotateX(2deg);
+  transition:transform 0.6s cubic-bezier(0.4,0,0.2,1);
+  transform-style:preserve-3d;
+  box-shadow:
+    0 50px 120px rgba(0,0,0,0.7),
+    0 0 0 1px rgba(255,255,255,0.04),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  position:relative;
+  overflow:hidden;
+}
+.form-card::before{
+  content:'';position:absolute;
+  top:-50%;left:-50%;width:200%;height:200%;
+  background:radial-gradient(circle at 30% 20%,rgba(255,255,255,0.03),transparent 50%);
+  pointer-events:none;
+}
+.form-card:hover{transform:rotateY(0deg) rotateX(0deg);}
+
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px;}
+.form-row.full{grid-template-columns:1fr;}
+.form-grp{display:flex;flex-direction:column;gap:8px;}
+
+.form-lbl{
+  font-size:12px;font-weight:500;
+  color:rgba(255,255,255,0.6);
+  letter-spacing:0.5px;
+}
+
+.form-inp,.form-sel,.form-ta{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:12px;
+  padding:14px 16px;
+  font-size:13.5px;
+  color:rgba(255,255,255,0.45);
+  font-family:'Inter',sans-serif;
+  transition:all 0.25s;
+  outline:none;width:100%;
+}
+.form-inp:focus,.form-sel:focus,.form-ta:focus{
+  border-color:rgba(255,255,255,0.22);
+  background:rgba(255,255,255,0.06);
+  color:#fff;
+  box-shadow:0 0 0 3px rgba(255,255,255,0.03);
+}
+.form-inp::placeholder,.form-ta::placeholder{color:rgba(255,255,255,0.2);}
+.form-sel{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.3)' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;}
+.form-sel option{background:#111;color:#fff;}
+.form-ta{resize:vertical;min-height:110px;line-height:1.65;}
+
+.sub-btn{
+  width:100%;
+  background:#fff;color:#000;
+  font-size:14px;font-weight:700;
+  padding:17px;border-radius:12px;
+  border:none;cursor:pointer;
+  font-family:'Inter',sans-serif;
+  letter-spacing:0.3px;
+  margin-top:6px;
+  transition:all 0.25s;
+  position:relative;overflow:hidden;
+}
+.sub-btn::after{
+  content:'';position:absolute;
+  top:50%;left:50%;
+  width:0;height:0;
+  background:rgba(0,0,0,0.08);
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  transition:width 0.4s,height 0.4s;
+}
+.sub-btn:hover::after{width:300px;height:300px;}
+.sub-btn:hover{transform:translateY(-1px);box-shadow:0 16px 50px rgba(255,255,255,0.12);}
+
+@media(max-width:900px){
+  .hire-sec{grid-template-columns:1fr;padding:60px 6%;gap:50px;}
+  .form-card{transform:none;}
+  .globe-wrap{width:160px;height:160px;}
+  #globeCanvas{width:160px;height:160px;}
+}
+
+</style>
+
+
+
+<canvas id="bgCanvas"></canvas>
+
+<section class="hire-sec">
+  <!-- LEFT -->
+  <div class="left">
+    <div class="pill"><span class="pill-dot"></span> Contact Me</div>
+    <h2 class="hire-title">
+      <span class="line1">Hire</span>
+      <span class="line2">Me!!</span>
+    </h2>
+    <p class="tagline">Turning ideas into high-quality visuals that help brands grow.</p>
+
+    <div class="globe-wrap">
+      <canvas id="globeCanvas" width="220" height="220"></canvas>
+    </div>
+
+    <div class="phone-row">
+      <div class="phone-ico">✉️</div>
+      <div>
+        <div class="phone-label">Email Me</div>
+        <div class="phone-num">nayanukoli182@gmail.com</div>
+      </div>
+    </div>
+
+    <button class="start-btn">
+      Start Project
+      <span class="btn-arr">→</span>
+    </button>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="right">
+    <div class="form-card" id="formCard">
+      <form action="https://formspree.io/f/xzzbbqwp" method="POST" id="contactForm">
+        <div class="form-row">
+          <div class="form-grp">
+            <label class="form-lbl">Name</label>
+            <input class="form-inp" type="text" name="name" placeholder="Your name" required>
+          </div>
+          <div class="form-grp">
+            <label class="form-lbl">Email</label>
+            <input class="form-inp" type="email" name="email" placeholder="your@email.com" required>
+          </div>
+        </div>
+
+        <div class="form-row full">
+          <div class="form-grp">
+            <label class="form-lbl">Message</label>
+            <textarea class="form-ta" name="message" placeholder="Write your request..." required></textarea>
+          </div>
+        </div>
+        <!-- Success message -->
+        <div id="successMsg" style="display:none;text-align:center;padding:16px;color:rgba(255,255,255,0.7);font-size:13px;background:rgba(255,255,255,0.04);border-radius:10px;margin-bottom:12px;border:1px solid rgba(255,255,255,0.08);">
+          ✅ Message sent! I'll reply to your email soon.
+        </div>
+        <button class="sub-btn" type="submit" id="subBtn">Submit</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+// ── BG PARTICLE FIELD ──────────────────────────────────────────
+const bg = document.getElementById('bgCanvas');
+const bgCtx = bg.getContext('2d');
+let BW, BH, bpts = [];
+
+function bgResize(){ BW = bg.width = innerWidth; BH = bg.height = innerHeight; }
+bgResize(); window.addEventListener('resize', bgResize);
+
+class BPt {
+  constructor(init){this.reset(init);}
+  reset(init){
+    this.x = Math.random()*BW; this.y = init ? Math.random()*BH : BH+5;
+    this.vy = -(0.08+Math.random()*0.22); this.vx = (Math.random()-.5)*0.12;
+    this.r = 0.4+Math.random()*1.0; this.a = 0.05+Math.random()*0.2;
+    this.da = 0.0003+Math.random()*0.0004; this.ph = Math.random()*Math.PI*2;
+  }
+  tick(t){ this.x+=this.vx+Math.sin(t*.0008+this.ph)*.1; this.y+=this.vy; this.a-=this.da; if(this.y<-5||this.a<=0)this.reset(false); }
+  draw(){ bgCtx.beginPath(); bgCtx.arc(this.x,this.y,this.r,0,Math.PI*2); bgCtx.fillStyle=`rgba(255,255,255,${this.a})`; bgCtx.fill(); }
+}
+for(let i=0;i<100;i++) bpts.push(new BPt(true));
+
+// Connection lines
+function drawLines(){
+  for(let i=0;i<bpts.length;i++){
+    for(let j=i+1;j<bpts.length;j++){
+      const dx=bpts[i].x-bpts[j].x, dy=bpts[i].y-bpts[j].y;
+      const dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<120){
+        bgCtx.beginPath();
+        bgCtx.moveTo(bpts[i].x,bpts[i].y);
+        bgCtx.lineTo(bpts[j].x,bpts[j].y);
+        bgCtx.strokeStyle=`rgba(255,255,255,${0.04*(1-dist/120)})`;
+        bgCtx.lineWidth=0.4;
+        bgCtx.stroke();
+      }
+    }
+  }
+}
+
+let bt=0;
+(function bLoop(){
+  bgCtx.clearRect(0,0,BW,BH);
+  bt++;
+  bpts.forEach(p=>{p.tick(bt);p.draw();});
+  drawLines();
+  requestAnimationFrame(bLoop);
+})();
+
+// ── 3D SPINNING GLOBE ──────────────────────────────────────────
+const gc = document.getElementById('globeCanvas');
+const gCtx = gc.getContext('2d');
+const GW = 220, GH = 220, GR = 88;
+let gAngle = 0;
+
+// Lat/lng dots for world map feel
+const worldDots = [];
+for(let lat=-80;lat<=80;lat+=12){
+  for(let lng=-180;lng<=180;lng+=14){
+    // Skip ocean areas (rough approximation)
+    const skip = (lat>20&&lat<60&&lng>-30&&lng<60) ||
+                 (lat>-10&&lat<60&&lng>60&&lng<150) ||
+                 (lat<-20&&lng>30&&lng<90);
+    if(!skip) worldDots.push({lat:lat*Math.PI/180, lng:lng*Math.PI/180});
+  }
+}
+
+// Grid lines
+const gridLines = [];
+for(let lat=-80;lat<=80;lat+=20) gridLines.push({type:'lat',val:lat*Math.PI/180});
+for(let lng=-180;lng<=180;lng+=30) gridLines.push({type:'lng',val:lng*Math.PI/180});
+
+function project3D(lat,lng,rotY){
+  const x = GR * Math.cos(lat) * Math.sin(lng + rotY);
+  const y = GR * Math.sin(lat);
+  const z = GR * Math.cos(lat) * Math.cos(lng + rotY);
+  return {x, y, z};
+}
+
+function drawGlobe(){
+  gCtx.clearRect(0,0,GW,GH);
+  const cx=GW/2, cy=GH/2;
+
+  // Outer glow
+  const grd = gCtx.createRadialGradient(cx-20,cy-20,10,cx,cy,GR+20);
+  grd.addColorStop(0,'rgba(255,255,255,0.06)');
+  grd.addColorStop(1,'rgba(255,255,255,0)');
+  gCtx.beginPath(); gCtx.arc(cx,cy,GR+20,0,Math.PI*2);
+  gCtx.fillStyle=grd; gCtx.fill();
+
+  // Globe base
+  const baseGrd = gCtx.createRadialGradient(cx-25,cy-25,5,cx,cy,GR);
+  baseGrd.addColorStop(0,'rgba(40,40,40,0.9)');
+  baseGrd.addColorStop(1,'rgba(10,10,10,0.95)');
+  gCtx.beginPath(); gCtx.arc(cx,cy,GR,0,Math.PI*2);
+  gCtx.fillStyle=baseGrd; gCtx.fill();
+  gCtx.strokeStyle='rgba(255,255,255,0.06)'; gCtx.lineWidth=1; gCtx.stroke();
+
+  // Grid lines
+  gridLines.forEach(line=>{
+    gCtx.beginPath();
+    let first=true;
+    const steps=60;
+    for(let i=0;i<=steps;i++){
+      let lat,lng;
+      if(line.type==='lat'){lat=line.val;lng=(i/steps)*Math.PI*2-Math.PI;}
+      else{lng=line.val;lat=(i/steps)*Math.PI-Math.PI/2;}
+      const p=project3D(lat,lng,gAngle);
+      if(p.z>0){
+        const sx=cx+p.x, sy=cy-p.y;
+        if(first){gCtx.moveTo(sx,sy);first=false;}
+        else gCtx.lineTo(sx,sy);
+      } else { first=true; }
+    }
+    gCtx.strokeStyle='rgba(255,255,255,0.05)'; gCtx.lineWidth=0.5; gCtx.stroke();
+  });
+
+  // World dots
+  worldDots.forEach(d=>{
+    const p=project3D(d.lat,d.lng,gAngle);
+    if(p.z>0){
+      const brightness=0.3+0.7*(p.z/GR);
+      const r=1.2+p.z/GR*0.8;
+      gCtx.beginPath();
+      gCtx.arc(cx+p.x, cy-p.y, r, 0, Math.PI*2);
+      gCtx.fillStyle=`rgba(255,255,255,${brightness*0.75})`;
+      gCtx.fill();
+    }
+  });
+
+  // Shine
+  const shine=gCtx.createRadialGradient(cx-30,cy-30,2,cx-20,cy-20,60);
+  shine.addColorStop(0,'rgba(255,255,255,0.12)');
+  shine.addColorStop(1,'rgba(255,255,255,0)');
+  gCtx.beginPath(); gCtx.arc(cx,cy,GR,0,Math.PI*2);
+  gCtx.fillStyle=shine; gCtx.fill();
+
+  gAngle += 0.008;
+  requestAnimationFrame(drawGlobe);
+}
+drawGlobe();
+
+// ── FORM CARD 3D MOUSE TILT ────────────────────────────────────
+const card = document.getElementById('formCard');
+const right = card.parentElement;
+right.addEventListener('mousemove', e=>{
+  const r=card.getBoundingClientRect();
+  const x=(e.clientX-r.left)/r.width-.5;
+  const y=(e.clientY-r.top)/r.height-.5;
+  card.style.transform=`rotateY(${x*12}deg) rotateX(${-y*8}deg) scale(1.01)`;
+});
+right.addEventListener('mouseleave',()=>{
+  card.style.transform='rotateY(-4deg) rotateX(2deg)';
+});
+
+// ── FORM SUBMIT via Formspree ──────────────────────────────────
+const form = document.getElementById('contactForm');
+const subBtn = document.getElementById('subBtn');
+const successMsg = document.getElementById('successMsg');
+
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  subBtn.textContent = 'Sending...';
+  subBtn.disabled = true;
+
+  const data = new FormData(form);
+  try {
+    const res = await fetch('https://formspree.io/f/xzzbbqwp', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      form.reset();
+      successMsg.style.display = 'block';
+      subBtn.textContent = 'Sent ✓';
+      subBtn.style.background = 'rgba(255,255,255,0.15)';
+      subBtn.style.color = '#fff';
+    } else {
+      subBtn.textContent = 'Error — Try Again';
+      subBtn.disabled = false;
+    }
+  } catch(err) {
+    subBtn.textContent = 'Error — Try Again';
+    subBtn.disabled = false;
+  }
+});
+
+</script>
+
+
+<script>
+
+// ── BG PARTICLE FIELD ──────────────────────────────────────────
+const bg = document.getElementById('bgCanvas');
+const bgCtx = bg.getContext('2d');
+let BW, BH, bpts = [];
+
+function bgResize(){ BW = bg.width = innerWidth; BH = bg.height = innerHeight; }
+bgResize(); window.addEventListener('resize', bgResize);
+
+class BPt {
+  constructor(init){this.reset(init);}
+  reset(init){
+    this.x = Math.random()*BW; this.y = init ? Math.random()*BH : BH+5;
+    this.vy = -(0.08+Math.random()*0.22); this.vx = (Math.random()-.5)*0.12;
+    this.r = 0.4+Math.random()*1.0; this.a = 0.05+Math.random()*0.2;
+    this.da = 0.0003+Math.random()*0.0004; this.ph = Math.random()*Math.PI*2;
+  }
+  tick(t){ this.x+=this.vx+Math.sin(t*.0008+this.ph)*.1; this.y+=this.vy; this.a-=this.da; if(this.y<-5||this.a<=0)this.reset(false); }
+  draw(){ bgCtx.beginPath(); bgCtx.arc(this.x,this.y,this.r,0,Math.PI*2); bgCtx.fillStyle=`rgba(255,255,255,${this.a})`; bgCtx.fill(); }
+}
+for(let i=0;i<100;i++) bpts.push(new BPt(true));
+
+// Connection lines
+function drawLines(){
+  for(let i=0;i<bpts.length;i++){
+    for(let j=i+1;j<bpts.length;j++){
+      const dx=bpts[i].x-bpts[j].x, dy=bpts[i].y-bpts[j].y;
+      const dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<120){
+        bgCtx.beginPath();
+        bgCtx.moveTo(bpts[i].x,bpts[i].y);
+        bgCtx.lineTo(bpts[j].x,bpts[j].y);
+        bgCtx.strokeStyle=`rgba(255,255,255,${0.04*(1-dist/120)})`;
+        bgCtx.lineWidth=0.4;
+        bgCtx.stroke();
+      }
+    }
+  }
+}
+
+let bt=0;
+(function bLoop(){
+  bgCtx.clearRect(0,0,BW,BH);
+  bt++;
+  bpts.forEach(p=>{p.tick(bt);p.draw();});
+  drawLines();
+  requestAnimationFrame(bLoop);
+})();
+
+// ── 3D SPINNING GLOBE ──────────────────────────────────────────
+const gc = document.getElementById('globeCanvas');
+const gCtx = gc.getContext('2d');
+const GW = 220, GH = 220, GR = 88;
+let gAngle = 0;
+
+// Lat/lng dots for world map feel
+const worldDots = [];
+for(let lat=-80;lat<=80;lat+=12){
+  for(let lng=-180;lng<=180;lng+=14){
+    // Skip ocean areas (rough approximation)
+    const skip = (lat>20&&lat<60&&lng>-30&&lng<60) ||
+                 (lat>-10&&lat<60&&lng>60&&lng<150) ||
+                 (lat<-20&&lng>30&&lng<90);
+    if(!skip) worldDots.push({lat:lat*Math.PI/180, lng:lng*Math.PI/180});
+  }
+}
+
+// Grid lines
+const gridLines = [];
+for(let lat=-80;lat<=80;lat+=20) gridLines.push({type:'lat',val:lat*Math.PI/180});
+for(let lng=-180;lng<=180;lng+=30) gridLines.push({type:'lng',val:lng*Math.PI/180});
+
+function project3D(lat,lng,rotY){
+  const x = GR * Math.cos(lat) * Math.sin(lng + rotY);
+  const y = GR * Math.sin(lat);
+  const z = GR * Math.cos(lat) * Math.cos(lng + rotY);
+  return {x, y, z};
+}
+
+function drawGlobe(){
+  gCtx.clearRect(0,0,GW,GH);
+  const cx=GW/2, cy=GH/2;
+
+  // Outer glow
+  const grd = gCtx.createRadialGradient(cx-20,cy-20,10,cx,cy,GR+20);
+  grd.addColorStop(0,'rgba(255,255,255,0.06)');
+  grd.addColorStop(1,'rgba(255,255,255,0)');
+  gCtx.beginPath(); gCtx.arc(cx,cy,GR+20,0,Math.PI*2);
+  gCtx.fillStyle=grd; gCtx.fill();
+
+  // Globe base
+  const baseGrd = gCtx.createRadialGradient(cx-25,cy-25,5,cx,cy,GR);
+  baseGrd.addColorStop(0,'rgba(40,40,40,0.9)');
+  baseGrd.addColorStop(1,'rgba(10,10,10,0.95)');
+  gCtx.beginPath(); gCtx.arc(cx,cy,GR,0,Math.PI*2);
+  gCtx.fillStyle=baseGrd; gCtx.fill();
+  gCtx.strokeStyle='rgba(255,255,255,0.06)'; gCtx.lineWidth=1; gCtx.stroke();
+
+  // Grid lines
+  gridLines.forEach(line=>{
+    gCtx.beginPath();
+    let first=true;
+    const steps=60;
+    for(let i=0;i<=steps;i++){
+      let lat,lng;
+      if(line.type==='lat'){lat=line.val;lng=(i/steps)*Math.PI*2-Math.PI;}
+      else{lng=line.val;lat=(i/steps)*Math.PI-Math.PI/2;}
+      const p=project3D(lat,lng,gAngle);
+      if(p.z>0){
+        const sx=cx+p.x, sy=cy-p.y;
+        if(first){gCtx.moveTo(sx,sy);first=false;}
+        else gCtx.lineTo(sx,sy);
+      } else { first=true; }
+    }
+    gCtx.strokeStyle='rgba(255,255,255,0.05)'; gCtx.lineWidth=0.5; gCtx.stroke();
+  });
+
+  // World dots
+  worldDots.forEach(d=>{
+    const p=project3D(d.lat,d.lng,gAngle);
+    if(p.z>0){
+      const brightness=0.3+0.7*(p.z/GR);
+      const r=1.2+p.z/GR*0.8;
+      gCtx.beginPath();
+      gCtx.arc(cx+p.x, cy-p.y, r, 0, Math.PI*2);
+      gCtx.fillStyle=`rgba(255,255,255,${brightness*0.75})`;
+      gCtx.fill();
+    }
+  });
+
+  // Shine
+  const shine=gCtx.createRadialGradient(cx-30,cy-30,2,cx-20,cy-20,60);
+  shine.addColorStop(0,'rgba(255,255,255,0.12)');
+  shine.addColorStop(1,'rgba(255,255,255,0)');
+  gCtx.beginPath(); gCtx.arc(cx,cy,GR,0,Math.PI*2);
+  gCtx.fillStyle=shine; gCtx.fill();
+
+  gAngle += 0.008;
+  requestAnimationFrame(drawGlobe);
+}
+drawGlobe();
+
+// ── FORM CARD 3D MOUSE TILT ────────────────────────────────────
+const card = document.getElementById('formCard');
+const right = card.parentElement;
+right.addEventListener('mousemove', e=>{
+  const r=card.getBoundingClientRect();
+  const x=(e.clientX-r.left)/r.width-.5;
+  const y=(e.clientY-r.top)/r.height-.5;
+  card.style.transform=`rotateY(${x*12}deg) rotateX(${-y*8}deg) scale(1.01)`;
+});
+right.addEventListener('mouseleave',()=>{
+  card.style.transform='rotateY(-4deg) rotateX(2deg)';
+});
+
+// ── FORM SUBMIT via Formspree ──────────────────────────────────
+const form = document.getElementById('contactForm');
+const subBtn = document.getElementById('subBtn');
+const successMsg = document.getElementById('successMsg');
+
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  subBtn.textContent = 'Sending...';
+  subBtn.disabled = true;
+
+  const data = new FormData(form);
+  try {
+    const res = await fetch('https://formspree.io/f/xzzbbqwp', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      form.reset();
+      successMsg.style.display = 'block';
+      subBtn.textContent = 'Sent ✓';
+      subBtn.style.background = 'rgba(255,255,255,0.15)';
+      subBtn.style.color = '#fff';
+    } else {
+      subBtn.textContent = 'Error — Try Again';
+      subBtn.disabled = false;
+    }
+  } catch(err) {
+    subBtn.textContent = 'Error — Try Again';
+    subBtn.disabled = false;
+  }
+});
+
+
+</script>
 </body>
 </html>
